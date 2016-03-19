@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
 			l.add("b");
 			l.add("c");
 			data.setmDataList(l);
+			data.setmSelectIndex(0);
 			myDataset.add(data);
 		}
 		MyAdapter myAdapter = new MyAdapter(myDataset);
@@ -148,16 +149,16 @@ public class MainActivity extends AppCompatActivity {
 		}
 
 		@Override
-		public void onBindViewHolder(ViewHolder holder, int position) {
+		public void onBindViewHolder(final ViewHolder holder, final int position) {
 			holder.mTextView.setText(mData.get(position).getName());
 			int index = mData.get(position).getmSelectIndex();
 			holder.mSpinnerAdapter.setData(mData.get(position).getmDataList());
-			holder.mSpinner.setSelection(index);
 			holder.mSpinnerAdapter.notifyDataSetChanged();
+			holder.mSpinner.setSelection(index);
 			holder.mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 				@Override
-				public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-					mData.get(position).setmSelectIndex(position);
+				public void onItemSelected(AdapterView<?> parent, View view, int p, long id) {
+					mData.get(position).setmSelectIndex(p);
 				}
 
 				@Override
